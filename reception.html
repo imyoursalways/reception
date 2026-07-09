@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajeev & Nadini - Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #051c1a;
+            color: #f3e5ab;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Ambient glowing stars background */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #082d2a 0%, #041614 100%);
+            z-index: -2;
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Added more coordinate points (radial-gradients) to multiply the sparkles */
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.2) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 80% 40%, rgba(212, 175, 55, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.25) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.15) 1px, transparent 1px),
+                radial-gradient(circle at 20% 60%, rgba(212, 175, 55, 0.2) 2px, transparent 2px),
+                radial-gradient(circle at 60% 10%, rgba(212, 175, 55, 0.25) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.18) 1.2px, transparent 1.2px),
+                radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.22) 2px, transparent 2px),
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.15) 1px, transparent 1px),
+                radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.2) 1.8px, transparent 1.8px);
+            /* Reduced pattern size from 250px to 180px to increase pattern repeat frequency */
+            background-size: 180px 180px;
+            z-index: -1;
+            opacity: 0.9;
+            /* Slightly bumped opacity for better visibility */
+            animation: driftSparkles 12s infinite linear;
+        }
+
+        /* Organic drifting keyframes simulating smooth, multi-directional floating movement */
+        @keyframes driftSparkles {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(15px, -45px);
+            }
+
+            50% {
+                transform: translate(-10px, -90px);
+            }
+
+            75% {
+                transform: translate(10px, -135px);
+            }
+
+            100% {
+                transform: translate(0, -180px);
+            }
+        }
+
+
+        /* Scrollable Container */
+        .scroll-container {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            /* Mobile wrapper feel */
+            margin: 0 auto;
+            min-height: 200vh;
+            /* Allow scrolling */
+            padding-bottom: 40vh;
+            /* Extra space to let last content scroll past the lotus */
+        }
+
+        /* Hero / First Screen View */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            padding-top: 15vh;
+            padding-left: 20px;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .text {
+            background: linear-gradient(to bottom,
+                    #ffe699 0%,
+                    /* Highlight Gold */
+                    #d4af37 35%,
+                    /* Vibrant Mid-Gold */
+                    #aa7c11 70%,
+                    /* Rich Shadow Gold */
+                    #f3e5ab 100%
+                    /* Reflected Bottom Light */
+                );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #d4af37;
+            /* Fallback for older browsers */
+            filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.45));
+        }
+
+        .names-title {
+
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 48px;
+            letter-spacing: 0.16em;
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            line-height: 1.2;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.45));
+        }
+
+        .and-separator {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            color: #d4af37;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .and-separator::before,
+        .and-separator::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin: 0 25px;
+        }
+
+        /* Gold diamond accent */
+        .gold-diamond {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #d4af37;
+            transform: rotate(45deg);
+            margin: 0 10px;
+            box-shadow: 0 0 8px #ffd700;
+        }
+
+        .invite-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: #dfba5b;
+            line-height: 1.8;
+            margin-top: 25px;
+            max-width: 80%;
+            text-transform: uppercase;
+        }
+
+        .swipe-hint {
+            position: absolute;
+            bottom: 38vh;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #ffd700;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+            text-transform: uppercase;
+            width: 100%;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            /* Adds smooth fade-out */
+        }
+
+
+        .swipe-hint .arrow {
+            display: block;
+            margin-top: 5px;
+            width: 24px;
+            height: 4px;
+            background-color: #ffd700;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            margin: 8px auto 0 auto;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-8px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-4px);
+            }
+        }
+
+        /* The Scrolling Content */
+        .scrolling-details {
+            position: relative;
+            z-index: 2;
+            /* Sits behind the lotus overlay (z-index: 10) but above background */
+            padding: 40px 25px;
+            text-align: center;
+            /* Starts scrolling up from beneath the lotus boundary */
+            margin-top: -30vh;
+        }
+
+        .card {
+            padding: 30px 20px;
+            margin-bottom: 40px;
+
+            /* ADDED: Setup initial transition and state for dynamic scroll fading */
+            opacity: 0;
+            will-change: opacity;
+            transition: opacity 0.15s ease-out;
+        }
+
+        .card h3 {
+            font-family: 'Cinzel', serif;
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #dfcfb5;
+            margin-bottom: 15px;
+        }
+
+        /* Fixed Lotus Overlay */
+        .lotus-overlay {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            /* Keep aligned with the mobile wrapper */
+            height: 35vh;
+            /* Covers the bottom 35% of the viewport */
+            z-index: 10;
+            /* Keep on top of scrolling details */
+            pointer-events: none;
+            /* Allows user to touch/scroll through the flowers */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Opaque solid teal block at the very bottom to fully hide text scrolling behind it */
+        .lotus-base-bg {
+            height: 15vh;
+            width: 100%;
+            background: linear-gradient(to bottom, rgba(5, 28, 26, 0.95), #051c1a 60%);
+            position: relative;
+        }
+
+        /* Lotus SVG graphics container */
+        .lotus-illustrations {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            overflow: visible;
+        }
+
+        .lotus-illustrations img {
+            display: block;
+            margin: 0 auto;
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Decorative bottom line border */
+        .bottom-bar {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #ffd700;
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Stars and sparkle background -->
+    <div class="stars-bg"></div>
+    <div class="sparkles"></div>
+
+    <!-- Scrollable content wrapper -->
+    <div class="scroll-container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <p class="invite-text">
+                We warmly invite you for<br>the Reception of
+            </p>
+            </br></br>
+            <h1 class="text names-title">SWATHI</h1>
+            <div class="text and-separator">
+                <span class="gold-diamond"></span>
+                AND
+                <span class="gold-diamond"></span>
+            </div>
+            <h1 class="text names-title">JIBIN</h1>
+
+
+
+            <div class="swipe-hint">
+                Swipe up for details
+                <div class="arrow"></div>
+            </div>
+        </section>
+
+        <!-- Details Section (Scrolls up from behind the lotus overlay) -->
+        <div class="scrolling-details">
+            <div class="card">
+                <h3 class="text">DATE & TIME</h3>
+                <p> Saturday, August 22, 2026<br>at 5:30 PM - 9:00 PM</p>
+            </div>
+
+            <div class="card">
+                <h3 class="text">VENUE</h3>
+                <p>Ambience Auditorium<br>Kadalundi Road, Feroke, Kozhikode.</p>
+
+            </div>
+
+            <div class="card">
+                <h3 class="text">RSVP</h3>
+                <p>Please respond by August 1oth, 2026 to help us prepare for your presence.</p>
+                <p>Contact: +91 (000) 000-000</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Fixed Lotus Overlay -->
+    <div class="lotus-overlay">
+        <!-- SVG Vector Lotus Art -->
+        <div class="lotus-illustrations">
+            <img src="r_bg.png" alt="r_bg">
+        </div>
+
+
+    </div>
+
+    <!-- ADDED: Dynamic Scroll Fade-In/Out for Content Cards -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card');
+            const swipeHint = document.querySelector('.swipe-hint');
+
+            function handleScrollFade() {
+                // 1. Hide swipe-hint smoothly on scroll
+                if (window.scrollY > 20) {
+                    swipeHint.style.opacity = '0';
+                    swipeHint.style.visibility = 'hidden';
+                } else {
+                    swipeHint.style.opacity = '0.8';
+                    swipeHint.style.visibility = 'visible';
+                }
+
+                // 2. Existing card scroll fade logic
+                const lotusTopThreshold = window.innerHeight * 0.65;
+
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+
+                    if (rect.top > lotusTopThreshold) {
+                        card.style.opacity = 0;
+                    } else if (rect.bottom < lotusTopThreshold) {
+                        card.style.opacity = 1;
+                    } else {
+                        const visibleHeight = lotusTopThreshold - rect.top;
+                        let opacity = visibleHeight / 150;
+
+                        if (opacity < 0) opacity = 0;
+                        if (opacity > 1) opacity = 1;
+
+                        card.style.opacity = opacity;
+                    }
+                });
+            }
+
+            // Run initial check on load and attach to scroll/resize events
+            window.addEventListener('scroll', handleScrollFade);
+            window.addEventListener('resize', handleScrollFade);
+            handleScrollFade();
+        });
+
+    </script>
+
+</body>
+
+</html>
