@@ -347,7 +347,7 @@
     <!-- Stars and sparkle background -->
     <div class="stars-bg"></div>
     <div class="sparkles"></div>
-
+ <audio id="background-music" loop src="music_1.mp3"></audio>
     <!-- Scrollable content wrapper -->
     <div class="scroll-container">
 
@@ -425,7 +425,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.card');
             const swipeHint = document.querySelector('.swipe-hint');
-
+            const backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.play().catch(e => console.error("Autoplay was prevented:", e));
             function handleScrollFade() {
                 // 1. Hide swipe-hint smoothly on scroll
                 if (window.scrollY > 20) {
