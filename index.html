@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -130,7 +131,7 @@
             color: #d4af37;
             /* Fallback for older browsers */
             filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.45));
-             font-size: 22px;
+            font-size: 48px;
         }
 
         .names-title {
@@ -252,7 +253,7 @@
 
         .card {
             padding: 30px 20px;
-            margin-bottom: 40px;
+            margin-bottom: 35vh;
 
             /* ADDED: Setup initial transition and state for dynamic scroll fading */
             opacity: 0;
@@ -262,14 +263,21 @@
 
         .card h3 {
             font-family: 'Cinzel', serif;
-            color: #ffd700;
+            color: #dfcfb5;
             font-size: 1.3rem;
             margin-bottom: 15px;
             letter-spacing: 2px;
         }
 
         .card p {
-            font-size: 0.9rem;
+            font-size: 2rem;
+            line-height: 1.6;
+            color: #dfcfb5;
+            margin-bottom: 15px;
+        }
+
+        .p-sub {
+            font-size: 1.2rem;
             line-height: 1.6;
             color: #dfcfb5;
             margin-bottom: 15px;
@@ -346,7 +354,7 @@
         <!-- Hero Section -->
         <section class="hero-section">
             <p class="invite-text">
-                We warmly invite you for<br>the Reception of
+                We warmly invite you for<br>the Wedding Reception of
             </p>
             </br>
             <h1 class="text names-title">SWATHI</h1>
@@ -368,24 +376,35 @@
         <!-- Details Section (Scrolls up from behind the lotus overlay) -->
         <div class="scrolling-details">
             <div class="card">
-                <h3 class="text">DATE & TIME</h3>
-                <p> Saturday, August 22, 2026<br>at 5:30 PM - 9:00 PM</p>
+                <h3>DATE & TIME</h3>
+                <p class="text names-title">Saturday</p>
+                <p class="text names-title">August 22, 2026</p>
+                <h4 class="p-sub">at 5:30 PM - 9:00 PM</h3>
             </div>
 
             <div class="card">
-                <h3 class="text">VENUE</h3>
-                <p>Ambience Auditorium<br>Kadalundi Road, Feroke, Kozhikode.</p>
-
+                <h3>VENUE</h3>
+                <p class="text names-title">Ambience Auditorium</p>
+                <h4 class="p-sub">Feroke, Kozhikode.</h4>
+                <a href="https://www.google.com/maps/place/AMBIENCE+Auditorium/@11.1618916,75.8428171,1548m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3ba6518188ab066d:0xcd7e6effe460cb2!8m2!3d11.1618863!4d75.845392!16s%2Fg%2F11h0mnzkrt?entry=ttu&g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D"
+                    class="p-sub">
+                    <i class="fa-solid fa-location-dot" style="color: hsl(349, 92%, 48%);"></i> <span
+                        data-translate="map_link">View on Google Maps</span>
+                </a>
             </div>
 
             <div class="card">
-                <h3 class="text">RSVP</h3>
-                <p>Please respond by August 1oth, 2026 to help us prepare for your presence.</p>
-                <p>Contact: +91 (000) 000-000</p>
+                <h3>RSVP</h3>
+                <h4 class="p-sub">Please respond by </h4>
+                <p class="text names-title">August 10th, 2026</p>
+                <h4 class="p-sub">Help us prepare for your presence by clicking the button below to fill out our RSVP form.</h4>
+                <a class="p-sub" href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE" class="rsvp-btn" target="_blank" rel="noopener noreferrer">
+                    RSVP Now
+                </a>
             </div>
-             <div class="card">
-                <h3 class="text">❤️ thank you ❤️</h3>
-                <h4 class="text"> J&S</p>
+            <div class="card">
+                <h3>thank you </h3>
+                <h4 class="text names-title"> S&J</p>
             </div>
         </div>
 
