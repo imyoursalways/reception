@@ -347,7 +347,7 @@
     <!-- Stars and sparkle background -->
     <div class="stars-bg"></div>
     <div class="sparkles"></div>
- <audio id="background-music" loop src="music_1.mp3"></audio>
+    <audio id="background-music" loop src="music_1.mp3"></audio>
     <!-- Scrollable content wrapper -->
     <div class="scroll-container">
 
@@ -397,8 +397,11 @@
                 <h3>RSVP</h3>
                 <h4 class="p-sub">Please respond by </h4>
                 <p class="text names-title">August 10th, 2026</p>
-                <h4 class="p-sub">Help us prepare for your presence by clicking the button below to fill out our RSVP form.</h4>
-                <a class="p-sub" href="https://docs.google.com/forms/d/e/1FAIpQLSfZJDHwsV2lIMa9oAOF_dnOtJFHSsBNdc_HrB-U2_7QE8zpfQ/viewform?usp=dialog" class="rsvp-btn" target="_blank" rel="noopener noreferrer">
+                <h4 class="p-sub">Help us prepare for your presence by clicking the button below to fill out our RSVP
+                    form.</h4>
+                <a class="p-sub"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfZJDHwsV2lIMa9oAOF_dnOtJFHSsBNdc_HrB-U2_7QE8zpfQ/viewform?usp=dialog"
+                    class="rsvp-btn" target="_blank" rel="noopener noreferrer">
                     RSVP Now
                 </a>
             </div>
@@ -426,7 +429,22 @@
             const cards = document.querySelectorAll('.card');
             const swipeHint = document.querySelector('.swipe-hint');
             const backgroundMusic = document.getElementById('background-music');
-            backgroundMusic.play().catch(e => console.error("Autoplay was prevented:", e));
+
+            // Function to play music once user interacts with the page
+            const playMusic = () => {
+                backgroundMusic.play()
+                    .then(() => {
+                        // Remove the event listeners so we don't call play multiple times
+                        document.removeEventListener('click', playMusic);
+                        document.removeEventListener('touchstart', playMusic);
+                    })
+                    .catch(e => console.error("Playback failed: ", e));
+            };
+
+            // Listen for any tap or click to trigger playback
+            document.addEventListener('click', playMusic);
+            document.addEventListener('touchstart', playMusic);
+
             function handleScrollFade() {
                 // 1. Hide swipe-hint smoothly on scroll
                 if (window.scrollY > 20) {
