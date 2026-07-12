@@ -339,6 +339,48 @@
             border-radius: 2px;
             opacity: 0.6;
         }
+
+        /* Floating Music Button */
+        .music-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(5, 28, 26, 0.85);
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .music-toggle-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        .music-toggle-btn i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Spinning animation for the music icon when playing */
+        @keyframes rotateMusic {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .music-toggle-btn.playing i {
+            animation: rotateMusic 4s linear infinite;
+        }
     </style>
 </head>
 
@@ -347,9 +389,13 @@
     <!-- Stars and sparkle background -->
     <div class="stars-bg"></div>
     <div class="sparkles"></div>
-    <audio id="background-music" loop src="music_1.mp3"></audio>
+    <audio id="background-music" loop src="music_1.mp3" allow="autoplay"></audio>
+    <!-- Floating Music Toggle Button -->
+    <button id="music-btn" class="music-toggle-btn" aria-label="Toggle Music">
+        <i class="fa-solid fa-music"></i>
+    </button>
     <!-- Scrollable content wrapper -->
-    <div class="scroll-container">
+    <div id='scroll-container' class="scroll-container">
 
         <!-- Hero Section -->
         <section class="hero-section">
@@ -367,8 +413,8 @@
 
 
 
-            <div class="swipe-hint">
-                Swipe up for details
+            <div id='scroll-hook' class="swipe-hint">
+                Swipe for more details.
                 <div class="arrow"></div>
             </div>
         </section>
@@ -429,21 +475,62 @@
             const cards = document.querySelectorAll('.card');
             const swipeHint = document.querySelector('.swipe-hint');
             const backgroundMusic = document.getElementById('background-music');
+            const scrollContainer = document.getElementById('scroll-container');
 
-            // Function to play music once user interacts with the page
+            // Music playing and toggling logic
+            const musicBtn = document.getElementById('music-btn');
+            const musicIcon = musicBtn.querySelector('i');
+            let isMusicPlaying = false;
+
+            const updateMusicUI = (playing) => {
+                isMusicPlaying = playing;
+                if (playing) {
+                    musicBtn.classList.add('playing');
+                    musicIcon.className = 'fa-solid fa-music'; // keeps spinning due to keyframe animation
+                } else {
+                    musicBtn.classList.remove('playing');
+                    musicIcon.className = 'fa-solid fa-play'; // Pause state icon
+                }
+            };
+
             const playMusic = () => {
+                if (isMusicPlaying) return;
                 backgroundMusic.play()
                     .then(() => {
-                        // Remove the event listeners so we don't call play multiple times
-                        document.removeEventListener('click', playMusic);
-                        document.removeEventListener('touchstart', playMusic);
+                        updateMusicUI(true);
+                        removeInteractionListeners();
                     })
                     .catch(e => console.error("Playback failed: ", e));
             };
 
-            // Listen for any tap or click to trigger playback
-            document.addEventListener('click', playMusic);
-            document.addEventListener('touchstart', playMusic);
+            const toggleMusic = (e) => {
+                e.stopPropagation(); // Prevent triggering general wrapper touch triggers
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play()
+                        .then(() => updateMusicUI(true))
+                        .catch(e => console.error("Playback failed: ", e));
+                } else {
+                    backgroundMusic.pause();
+                    updateMusicUI(false);
+                }
+                removeInteractionListeners();
+            };
+
+            const removeInteractionListeners = () => {
+                scrollContainer.removeEventListener('click', playMusic);
+                scrollContainer.removeEventListener('keydown', playMusic);
+                scrollContainer.removeEventListener('pointerdown', playMusic);
+                scrollContainer.removeEventListener('touchstart', playMusic);
+            };
+
+            // Listen for click on music button
+            musicBtn.addEventListener('click', toggleMusic);
+
+            // Listen for any tap or click to trigger auto-playback on first user interaction
+            scrollContainer.addEventListener('click', playMusic);
+            scrollContainer.addEventListener('keydown', playMusic);
+            scrollContainer.addEventListener('pointerdown', playMusic);
+            scrollContainer.addEventListener('touchstart', playMusic);
 
             function handleScrollFade() {
                 // 1. Hide swipe-hint smoothly on scroll
