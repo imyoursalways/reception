@@ -209,7 +209,15 @@
             transition: opacity 0.4s ease, visibility 0.4s ease;
             /* Adds smooth fade-out */
         }
-
+        .rsvp-text {
+            text-align: center;
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            color: #ffd700;
+            opacity: 0.8;
+            width: 100%;
+            /* Adds smooth fade-out */
+        }
 
         .swipe-hint .arrow {
             display: block;
@@ -374,8 +382,13 @@
 
         /* Spinning animation for the music icon when playing */
         @keyframes rotateMusic {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .music-toggle-btn.playing i {
@@ -441,15 +454,17 @@
 
             <div class="card">
                 <h3>RSVP</h3>
-                <h4 class="p-sub">Please respond by </h4>
-                <h4 class="p-sub">August 14th, 2026</h4>
-                <h4 class="p-sub">Help us prepare for your presence by clicking the button below to fill out our RSVP
+                <h4>Help us prepare for your presence by clicking the button below to fill out our RSVP
                     form.</h4>
+                    </br>
+                    </br>
                 <a class="p-sub"
                     href="https://docs.google.com/forms/d/e/1FAIpQLSfZJDHwsV2lIMa9oAOF_dnOtJFHSsBNdc_HrB-U2_7QE8zpfQ/viewform?usp=dialog"
                     class="rsvp-btn" target="_blank" rel="noopener noreferrer">
                     RSVP Now
                 </a>
+                </br>
+                <h10 class="rsvp-text">(Please respond by August 14th)</h10>
             </div>
             <div class="card">
                 <h3>thank you </h3>
